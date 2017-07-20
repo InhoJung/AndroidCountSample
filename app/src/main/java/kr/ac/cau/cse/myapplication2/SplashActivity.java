@@ -1,21 +1,27 @@
 package kr.ac.cau.cse.myapplication2;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class SplashActivity extends AppCompatActivity {
 //    Handler handler;
     TextView textView;
+    private  static final int LOGIN=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+//        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#135232")));
+//        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.RED));
 //        textView = (TextView)findViewById(R.id.textView3);
 //        handler = new Handler();
 //
@@ -28,8 +34,11 @@ public class SplashActivity extends AppCompatActivity {
                 new Runnable() {
                     @Override
                     public void run() {
-                        startActivity(new Intent(SplashActivity.this,OnClickActivity.class));
-                        finish();
+//                        startActivity(new Intent(SplashActivity.this,OnClickActivity.class));
+
+//                        startActivity(new Intent("kr.ac.cau.cse.aaaa.LOGIN"));
+                        startActivityForResult(new Intent("kr.ac.cau.cse.aaaa.LOGIN"),LOGIN);
+//                        finish();
                     }
                 },3000
         );
@@ -91,4 +100,16 @@ public class SplashActivity extends AppCompatActivity {
 //            return t2;
 //        }
 //    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode ==LOGIN){
+            if(resultCode==3){
+                Toast.makeText(SplashActivity.this,"splash 에서"+data.getStringExtra("resultString"),Toast.LENGTH_SHORT).show();
+            }else{
+
+            }
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package kr.ac.cau.cse.myapplication2;
 
 import android.annotation.TargetApi;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -36,9 +37,16 @@ public class OnClickActivity extends AppCompatActivity {
                 Log.d(TAG, "button 1 clicked");
                 textView.setText("A");
                 textView.setBackgroundColor(Color.parseColor("#12CC12"));
+                ComponentName cn = new ComponentName("kr.ac.cau.cse.myapplication","kr.ac.cau.cse.myapplication.MainActivity");
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                intent.setComponent(cn);
+                intent.putExtra("name","me");
+                startActivityForResult(intent,1);
 
-                Intent intent = new Intent(OnClickActivity.this,Main3Activity.class);
-                startActivity(intent);
+//                출처: http://devbible.tistory.com/142 [devbible]
+//                Intent intent = new Intent("com.oracle.auth.Lists");
+//                startActivity(intent);
 
 //                startActivity(new Intent(OnClickActivity.this,Main3Activity.class));
 
@@ -66,5 +74,12 @@ public class OnClickActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("activity result",""+data.getStringExtra("result"));
+
     }
 }
